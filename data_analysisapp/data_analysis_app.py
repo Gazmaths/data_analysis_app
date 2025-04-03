@@ -40,6 +40,7 @@ uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type=["csv"])
 # ========== APP LOGIC ==========
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
+    df.columns = pd.io.parsers.ParserBase({'names': df.columns})._maybe_dedup_names(df.columns)
     st.success("✅ File uploaded successfully!")
 
     with st.expander("👁️ Data Preview"):
